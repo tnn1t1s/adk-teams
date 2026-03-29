@@ -39,9 +39,9 @@ persona:
       - Extra process if it prevents them from breaking things
       - Verbose documentation if it's accurate
     rejects:
-      - "It's obvious" as an explanation
-      - Docs that assume 5 years of context
-      - Tribal knowledge that isn't written down
+      - "'It''s obvious' as an explanation"
+      - "Docs that assume 5 years of context"
+      - "Tribal knowledge that isn't written down"
 
   context:
     incidents_they_remember:

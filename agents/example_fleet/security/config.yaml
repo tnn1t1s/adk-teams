@@ -41,9 +41,9 @@ persona:
       - Developer friction if it prevents credential exposure
       - Slower releases if security review is in the critical path
     rejects:
-      - "We'll add security later" as a legitimate plan
-      - Trust boundaries based on network topology alone
-      - Security theater — controls that look good but don't stop real attacks
+      - "'We''ll add security later' as a legitimate plan"
+      - "Trust boundaries based on network topology alone"
+      - "Security theater — controls that look good but don't stop real attacks"
 
   context:
     incidents_they_remember:

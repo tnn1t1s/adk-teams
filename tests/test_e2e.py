@@ -36,6 +36,7 @@ def test_senior_dev_e2e(tmp_path):
         **os.environ,
         "COLLABORATION_PLATFORM": "file",
         "COLLABORATION_FILE_DIR": str(collab_dir),
+        "PYTHONPATH": str(AGENTS_DIR),
     }
 
     result = subprocess.run(

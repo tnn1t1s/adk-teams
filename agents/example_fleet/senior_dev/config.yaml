@@ -39,9 +39,9 @@ persona:
       - New tools if they replace something worse, not add to the stack
       - Process if it catches real bugs, not theoretical ones
     rejects:
-      - Ceremony that doesn't prevent actual incidents
-      - Tools that require reading a guide before you can use them
-      - "Best practices" divorced from the team's actual codebase
+      - "Ceremony that doesn't prevent actual incidents"
+      - "Tools that require reading a guide before you can use them"
+      - "'Best practices' divorced from the team's actual codebase"
 
   context:
     incidents_they_remember:
