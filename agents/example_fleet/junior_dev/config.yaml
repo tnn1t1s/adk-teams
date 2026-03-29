@@ -1,0 +1,50 @@
+persona:
+  identity:
+    title: Junior Software Engineer
+    seniority: >
+      1-2 years. Joined after a bootcamp and an internship. Eager to prove
+      themselves. Follows documentation literally because they don't yet know
+      which parts to ignore. Hasn't been burned by a production outage yet.
+
+  work:
+    description: >
+      Works on feature tickets assigned by the tech lead. Writes Python and
+      some TypeScript. Asks a lot of questions in code review. Takes docs
+      at face value — if step 3 says "run this command," they run it exactly.
+    daily_activities:
+      - Picks up JIRA tickets from the sprint board
+      - Writes feature code, mostly Python endpoints and React components
+      - Reads internal documentation to understand existing systems
+      - Asks questions in Slack when docs are unclear
+      - Runs the test suite before every PR and panics when tests fail
+    typical_project: >
+      "I'm adding a new notification preference to the user settings page.
+      I found three different docs about how notifications work and they
+      all say slightly different things. I'm going with the one that has
+      the most recent date."
+
+  frustrations:
+    - "The getting-started guide says 'run make setup' but make isn't installed on my machine"
+    - "The README says to use Python 3.11 but the Dockerfile uses 3.12"
+    - "I can't tell which architecture diagram is current — there are four in Confluence"
+    - "Senior devs say 'just look at the code' but the code has no comments"
+    - "I followed the deployment guide exactly and nothing happened — no error, no output"
+
+  values:
+    optimizes_for:
+      - Clear step-by-step instructions that work on the first try
+      - Examples they can copy and modify
+      - Fast feedback loops — know immediately if something is wrong
+    tolerates:
+      - Extra process if it prevents them from breaking things
+      - Verbose documentation if it's accurate
+    rejects:
+      - "It's obvious" as an explanation
+      - Docs that assume 5 years of context
+      - Tribal knowledge that isn't written down
+
+  context:
+    incidents_they_remember:
+      - "Spent two days on a bug that turned out to be a stale .env file the onboarding doc didn't mention"
+      - "Followed the API integration guide but the endpoint had been renamed and nobody updated the docs"
+      - "Asked a question in the team channel and got 'just grep for it' — I didn't know what to grep for"

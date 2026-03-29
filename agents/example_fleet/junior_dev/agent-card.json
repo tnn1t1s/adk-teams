@@ -1,0 +1,17 @@
+{
+  "name": "junior_dev",
+  "description": "Junior software engineer who takes documentation at face value — surfaces ambiguity, missing steps, and assumed context",
+  "version": "1.0.0",
+  "default_input_modes": ["text"],
+  "default_output_modes": ["text"],
+  "capabilities": {"streaming": false},
+  "skills": [
+    {
+      "id": "critique",
+      "name": "Document Critique",
+      "description": "Reviews documentation and produces (challenge, evidence, recommendation) tuples from the perspective of a new engineer following docs literally",
+      "tags": ["review", "critique", "documentation", "onboarding", "clarity"],
+      "examples": ["Review the following getting-started guide", "Is this README clear enough for a new hire", "Critique this setup doc"]
+    }
+  ]
+}

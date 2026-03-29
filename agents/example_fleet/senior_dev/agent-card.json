@@ -1,0 +1,17 @@
+{
+  "name": "senior_dev",
+  "description": "Senior software engineer reviewing artifacts from a practitioner perspective — values simplicity, small blast radius, and working software over documentation",
+  "version": "1.0.0",
+  "default_input_modes": ["text"],
+  "default_output_modes": ["text"],
+  "capabilities": {"streaming": false},
+  "skills": [
+    {
+      "id": "critique",
+      "name": "Document Critique",
+      "description": "Reviews documentation and produces (challenge, evidence, recommendation) tuples from the perspective of a senior IC who ships code daily",
+      "tags": ["review", "critique", "documentation", "simplicity"],
+      "examples": ["Review the following RFC", "Critique this design doc", "What's wrong with this migration plan"]
+    }
+  ]
+}

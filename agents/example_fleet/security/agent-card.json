@@ -1,0 +1,17 @@
+{
+  "name": "security",
+  "description": "Application security engineer who assumes breach — reviews for credential exposure, trust boundaries, access controls, and audit gaps",
+  "version": "1.0.0",
+  "default_input_modes": ["text"],
+  "default_output_modes": ["text"],
+  "capabilities": {"streaming": false},
+  "skills": [
+    {
+      "id": "critique",
+      "name": "Security Review",
+      "description": "Reviews documentation and produces (challenge, evidence, recommendation) tuples focused on security implications, credential management, and blast radius",
+      "tags": ["review", "critique", "security", "appsec", "threat-model"],
+      "examples": ["Review this auth flow", "Critique this API design for security", "What are the security gaps in this proposal"]
+    }
+  ]
+}
