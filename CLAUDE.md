@@ -8,13 +8,18 @@ adk-teams is a standalone, reusable framework for building multi-agent critique 
 
 ```
 adk-teams/
-  agents/
-    tools/                      # shared tools — all agents import from here
-      collaboration/            # GoF Factory for platform backends
-    example_fleet/              # 3 example agents (senior_dev, junior_dev, security)
-      developer/base.yaml       # shared dev team identity
-  tests/                        # integration tests
-  docs/                         # guides
+  adk_teams/                        # core package — primitives, ABCs, factories
+    persona.py                      # build_persona_prompt(): YAML → system prompt
+    tools/                          # shared tools
+      collaboration/                # GoF Factory for platform backends
+  examples/
+    01_hello/                       # simplest agent — no tools, no inheritance
+    02_a2a_greeting/                # two agents coordinating via collab channel
+    03_dev_team/                    # full critique fleet (senior_dev, junior_dev, security)
+  tests/
+    test_tools/                     # core tool tests
+    test_e2e/                       # E2E tests per example
+  docs/                             # guides
 ```
 
 ## Rules
@@ -33,9 +38,10 @@ adk-teams/
 
 ### Imports
 
-- **Never use `sys.path.insert`** — `pyproject.toml` sets `pythonpath = [".", "agents"]`.
+- **Never use `sys.path.insert`** — `pyproject.toml` sets `pythonpath = ["."]`.
 - **Never call `load_dotenv` in test code** — `pytest-dotenv` handles it.
-- Agent code uses `from tools import file_read, web_search, collab_read, collab_post`.
+- Agent code uses `from adk_teams.tools import file_read, web_search, collab_read, collab_post`.
+- Agent code uses `from adk_teams import build_persona_prompt`.
 
 ### Environment
 
@@ -55,6 +61,9 @@ adk-teams/
 # Tests
 pytest
 
-# Single agent
-cd agents && adk run example_fleet/senior_dev
+# Single agent (example: 03_dev_team)
+cd examples/03_dev_team/agents && adk run senior_dev
+
+# Simplest agent
+cd examples/01_hello/agents && adk run greeter
 ```

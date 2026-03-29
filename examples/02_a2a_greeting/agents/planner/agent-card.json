@@ -1,0 +1,17 @@
+{
+  "name": "planner",
+  "description": "Plans greeting style based on context and posts recommendation to collaboration channel",
+  "version": "1.0.0",
+  "default_input_modes": ["text"],
+  "default_output_modes": ["text"],
+  "capabilities": {"streaming": false},
+  "skills": [
+    {
+      "id": "plan-greeting",
+      "name": "Greeting Planning",
+      "description": "Decides on greeting style (formal, casual, enthusiastic) and posts plan to collaboration channel",
+      "tags": ["planning", "greeting", "a2a"],
+      "examples": ["Plan a greeting for the new intern", "What greeting style should we use for the CEO visit"]
+    }
+  ]
+}

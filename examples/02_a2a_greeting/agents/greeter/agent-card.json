@@ -1,0 +1,17 @@
+{
+  "name": "greeter",
+  "description": "Greets people using style recommendations from the planner agent via collaboration channel",
+  "version": "1.0.0",
+  "default_input_modes": ["text"],
+  "default_output_modes": ["text"],
+  "capabilities": {"streaming": false},
+  "skills": [
+    {
+      "id": "greet",
+      "name": "Adaptive Greeting",
+      "description": "Reads planner recommendations from collaboration channel and greets in the recommended style",
+      "tags": ["greeting", "a2a", "adaptive"],
+      "examples": ["Greet the user", "Say hello using the planned style"]
+    }
+  ]
+}

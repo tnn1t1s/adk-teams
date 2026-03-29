@@ -6,8 +6,6 @@ A reusable framework for building multi-agent critique fleets using [Google ADK]
 
 A fleet of independent agents, each embodying a distinct professional persona, reviews the same artifact and posts structured disagreements to a shared channel. A human synthesizes the disagreements into decisions.
 
-The value is not in any single agent's output. It is in the collision of perspectives and the human judgment applied to them.
-
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
 │  senior_dev  │     │  junior_dev  │     │  security    │
@@ -33,8 +31,6 @@ The value is not in any single agent's output. It is in the collision of perspec
           └─────────────────┘
 ```
 
-Each agent produces `(challenge, evidence, recommendation)` tuples. The persona drives what challenges surface.
-
 ## Quick Start
 
 ```bash
@@ -45,11 +41,19 @@ pip install -e .
 cp .env.example .env
 # Add your OPENROUTER_API_KEY and SERPER_API_KEY
 
-# 3. Run an agent
-cd agents && adk run example_fleet/senior_dev
+# 3. Run the simplest example
+cd examples/01_hello/agents && adk run greeter
 ```
 
-## Example Fleet
+## Examples
+
+| # | Example | What it teaches |
+|---|---------|-----------------|
+| [01](examples/01_hello/) | Hello | Simplest agent — one persona, no tools, no inheritance |
+| [02](examples/02_a2a_greeting/) | A2A Greeting | Two agents coordinating via collaboration channel |
+| [03](examples/03_dev_team/) | Dev Team | Full critique fleet with YAML inheritance and all tools |
+
+### 03 — Dev Team Critique Fleet
 
 Three agents forming a minimum viable tension triangle:
 
@@ -59,45 +63,47 @@ Three agents forming a minimum viable tension triangle:
 | `junior_dev` | 1-2 years, follows docs literally | "I followed the docs exactly and it didn't work." |
 | `security` | AppSec engineer, assumes breach | "Where can credentials leak? What's the blast radius?" |
 
-## A2A Agent Cards
-
-Every agent directory includes an `agent-card.json` following the [A2A protocol](https://github.com/google/A2A) spec. These cards declare the agent's name, capabilities, and skills for future orchestrator discovery:
-
-```json
-{
-  "name": "senior_dev",
-  "description": "Senior software engineer reviewing artifacts...",
-  "version": "1.0.0",
-  "capabilities": {"streaming": false},
-  "skills": [
-    {
-      "id": "critique",
-      "name": "Document Critique",
-      "description": "Reviews documentation and produces (challenge, evidence, recommendation) tuples"
-    }
-  ]
-}
+```bash
+cd examples/03_dev_team/agents && adk run senior_dev
 ```
 
-Agent cards enable an orchestrator to discover fleet members, understand their capabilities, and route review tasks to appropriate agents.
+## Core Package: `adk_teams`
 
-## Collaboration Platforms
+```python
+from adk_teams import build_persona_prompt
+from adk_teams.tools import file_read, web_search, collab_post, collab_read
+```
 
-The collaboration tools delegate to a backend selected by the `COLLABORATION_PLATFORM` env var:
-
-| Platform | Backend | Use case |
-|----------|---------|----------|
-| `file` | Append-only JSONL | Development and testing |
-| `discord` | Discord API | Production collaboration |
-| `irc` | Stub | Planned — future A2A agent communication |
-
-Set `COLLABORATION_PLATFORM=file` and read output with `cat .collaboration/<channel>.jsonl`.
+- **`build_persona_prompt(config_path, base_path=None)`** — loads YAML persona config, merges with optional base, returns system prompt string
+- **Tools** — `file_read`, `web_search`, `collab_post`, `collab_read`
+- **Collaboration platforms** — file (JSONL), Discord, IRC (stub)
 
 ## Building Your Own Fleet
 
-1. Create a `base.yaml` with shared team context
-2. Write persona `config.yaml` files — frustrations, values, incidents (no checklists)
-3. Copy the `agent.py` pattern — load YAML, build system prompt, export `root_agent`
+1. Create a `config.yaml` with persona sections: identity, work, frustrations, values, context
+2. Optionally create a `base.yaml` for shared team context
+3. Write a minimal `agent.py`:
+
+```python
+from pathlib import Path
+from adk_teams import build_persona_prompt
+from adk_teams.tools import file_read, web_search, collab_post, collab_read
+from google.adk.agents import Agent
+from google.adk.models.lite_llm import LiteLlm
+
+prompt = build_persona_prompt(
+    base_path=Path(__file__).parent.parent / "team" / "base.yaml",
+    config_path=Path(__file__).parent / "config.yaml",
+)
+
+root_agent = Agent(
+    name="my_agent",
+    model=LiteLlm(model="openrouter/anthropic/claude-sonnet-4"),
+    instruction=prompt,
+    tools=[file_read, web_search, collab_post, collab_read],
+)
+```
+
 4. Add an `agent-card.json` for A2A discovery
 5. Run with `adk run` and tune personas until output is specific
 
@@ -116,5 +122,5 @@ See [docs/persona-design.md](docs/persona-design.md) for detailed guidance.
 pytest
 
 # File and collaboration tests only (no API key needed)
-pytest tests/test_file_read.py tests/test_collab_post.py tests/test_collab_read.py
+pytest tests/test_tools/test_file_read.py tests/test_tools/test_collab_post.py tests/test_tools/test_collab_read.py
 ```

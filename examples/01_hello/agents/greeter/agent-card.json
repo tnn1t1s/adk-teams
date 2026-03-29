@@ -1,0 +1,17 @@
+{
+  "name": "greeter",
+  "description": "Friendly greeter that makes people feel welcome",
+  "version": "1.0.0",
+  "default_input_modes": ["text"],
+  "default_output_modes": ["text"],
+  "capabilities": {"streaming": false},
+  "skills": [
+    {
+      "id": "greet",
+      "name": "Greeting",
+      "description": "Greets people warmly and makes them feel welcome",
+      "tags": ["greeting", "welcome"],
+      "examples": ["Say hello", "Greet the team", "Welcome a new hire"]
+    }
+  ]
+}
